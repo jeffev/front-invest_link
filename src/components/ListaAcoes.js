@@ -6,6 +6,7 @@ import { MRT_Localization_PT_BR } from 'material-react-table/locales/pt-BR';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { ExportToCsv } from 'export-to-csv';
 import { darken } from '@mui/material';
+import authService from '../services/auth.service';
 
 
 const columns = [
@@ -78,7 +79,7 @@ function ListaAcoes() {
   useEffect(() => {
     axios.get('http://localhost:8080/api/v1/acoes/', {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${authService.getToken()}`
       }
     })
       .then(response => {

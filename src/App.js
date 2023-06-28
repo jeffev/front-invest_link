@@ -6,8 +6,8 @@ import { orange } from '@mui/material/colors'
 import BarraNavegacao from './components/BarraNavegacao';
 import Footer from './components/Footer';
 import { GlobalStyles } from '@mui/styled-engine-sc';
-import Conteudo from './components/Conteudo';
 import { BrowserRouter } from 'react-router-dom'
+import Rotas from './components/Rotas';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -29,7 +29,7 @@ function App() {
       <BrowserRouter>
         <BarraNavegacao check={darkMode} change={() => setDarkMode(!darkMode)} />
         <Container maxWidth="xl">
-          <Conteudo />
+          <Rotas />
         </Container>
       </BrowserRouter>
       <Footer />

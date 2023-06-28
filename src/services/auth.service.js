@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const API_URL = "http://localhost:8080/";
 
 class AuthService {
@@ -13,31 +11,53 @@ class AuthService {
         });
 
         if (response.ok) {
-            const token = await response.text(); 
-            localStorage.setItem("token", token);
+            const user = await response.json();
+            localStorage.setItem("user", JSON.stringify(user));
         }
-        
+
         return response;
     }
 
     logout() {
-        localStorage.removeItem("token");
+        localStorage.removeItem("user");
     }
 
-    register(login, password) {
-        return axios.post(API_URL + "/api/v1/usuario/register", {
-            login,
-            password
+    async register(nome, sobrenome, login, email, password) {
+        const response = await fetch(API_URL + "api/v1/usuario/register", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                nome,
+                sobrenome,
+                login,
+                email,
+                password
+            }),
         });
+
+        if (response.ok) {
+            const user = await response.json();
+            localStorage.setItem("user", JSON.stringify(user));
+        }
+
+        return response;
     }
 
     getCurrentUser() {
-        return JSON.parse(localStorage.getItem('token'));
+        const user = JSON.parse(localStorage.getItem('user'));
+        return user ? user.nome : null;
+    }
+
+    getToken() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        return user ? user.token : null;
     }
 
     getAuth() {
-        const token = JSON.parse(localStorage.getItem('token'));
-        return (token ? true : false);
+        const user = localStorage.getItem('user');
+        return (user ? true : false);
     }
 }
 

@@ -22,7 +22,7 @@ function BarraNavegacao({ check, change }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const isUserLoggedIn = !!localStorage.getItem('token');
+  const isUserLoggedIn = !!localStorage.getItem('user');
 
   const handleLogout = () => {
     authService.logout();
@@ -46,13 +46,13 @@ function BarraNavegacao({ check, change }) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Invest Link
           </Typography>
-          <FormControlLabel control={<Switch color="primary" onChange={change} checked={check} />} label="Dark mode" />
+          <FormControlLabel control={<Switch color="secondary" onChange={change} checked={check} />} label="Dark mode" />
           {isUserLoggedIn ? (
-            <Button color="primary" variant="contained" onClick={handleLogout}>
+            <Button color="secondary" variant="contained" onClick={handleLogout}>
               Logout
             </Button>
           ) : (
-            <Button color="primary" component={Link} to={"/login"} variant="contained">
+            <Button color="secondary" component={Link} to={"/login"} variant="contained">
               Login
             </Button>
           )}

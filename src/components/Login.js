@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import authService from '../services/auth.service';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from '@mui/material';
 
 export default function Login() {
     const [error, setError] = React.useState(null);
@@ -29,12 +30,12 @@ export default function Login() {
 
         try {
             const response = await authService.login(login, password);
-            
+
             if (response.ok) {
                 setError('');
 
                 setLoading(false);
-                navigate('/home'); 
+                navigate('/home');
             } else {
                 setError('Usuário ou senha inválidos');
                 setLoading(false);
@@ -62,7 +63,7 @@ export default function Login() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Entrar
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -80,7 +81,7 @@ export default function Login() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="Senha"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -95,40 +96,40 @@ export default function Login() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        Entrar
                     </Button>
                     {loading && (
                         <CircularProgress
                             size={26}
                             sx={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            marginTop: '-12px',
-                            marginLeft: '-12px',
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                marginTop: '-12px',
+                                marginLeft: '-12px',
                             }}
                         />
-                        )}
+                    )}
                     {error && (
-                        <Typography component="p" variant="h6" color="error">
-                        {error}
-                        </Typography>
+                        <Alert severity="error">
+                            {error}
+                        </Alert>
                     )}
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
-                                Forgot password?
+                                Esqueceu a senha?
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                            <Link href="/registrar" variant="body2">
+                                {"Não tem uma conta? Criar"}
                             </Link>
                         </Grid>
                     </Grid>
                 </Box>
             </Box>
-            
+
             <Box sx={{ mt: 20, mb: 4 }} />
         </Container>
     );
