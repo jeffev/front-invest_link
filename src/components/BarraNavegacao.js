@@ -22,7 +22,7 @@ function BarraNavegacao({ check, change }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const isUserLoggedIn = !!localStorage.getItem('user');
+  const isUserLoggedIn = !!sessionStorage.getItem('user');
 
   const handleLogout = () => {
     authService.logout();
@@ -63,7 +63,7 @@ function BarraNavegacao({ check, change }) {
         <div style={{ width: 250 }} color='' onClick={() => setOpen(false)}>
           <List>
             <ListItemButton component={Link} to={"/"}>
-              <ListItemIcon></ListItemIcon>
+              <ListItemIcon><HomeOutlined /></ListItemIcon>
               <ListItemText primary="Invest Link" />
             </ListItemButton>
             <Divider />
@@ -86,7 +86,7 @@ function BarraNavegacao({ check, change }) {
             </ListItemButton>
             <ListItemButton component={Link} to={"/minhaCarteira"}>
               <ListItemIcon><HomeOutlined /></ListItemIcon>
-              <ListItemText primary="Minha carteira desejada" />
+              <ListItemText primary="Minha carteira" />
             </ListItemButton>
             <ListItemButton component={Link} to={"/minhasOpcoes"}>
               <ListItemIcon><HomeOutlined /></ListItemIcon>

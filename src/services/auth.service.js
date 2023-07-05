@@ -12,14 +12,14 @@ class AuthService {
 
         if (response.ok) {
             const user = await response.json();
-            localStorage.setItem("user", JSON.stringify(user));
+            sessionStorage.setItem("user", JSON.stringify(user));
         }
 
         return response;
     }
 
     logout() {
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
     }
 
     async register(nome, sobrenome, login, email, password) {
@@ -39,24 +39,29 @@ class AuthService {
 
         if (response.ok) {
             const user = await response.json();
-            localStorage.setItem("user", JSON.stringify(user));
+            sessionStorage.setItem("user", JSON.stringify(user));
         }
 
         return response;
     }
 
     getCurrentUser() {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(sessionStorage.getItem('user'));
         return user ? user.nome : null;
     }
 
+    getCurrentLogin() {
+        const user = JSON.parse(sessionStorage.getItem('user'));
+        return user ? user.login : null;
+    }
+
     getToken() {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(sessionStorage.getItem('user'));
         return user ? user.token : null;
     }
 
     getAuth() {
-        const user = localStorage.getItem('user');
+        const user = sessionStorage.getItem('user');
         return (user ? true : false);
     }
 }
